@@ -6,3 +6,4 @@ Lucas Vinicius
 Rommel Tolledo 
 Manoel Terceiro
 Matheus Fernandes
+João Oliveira

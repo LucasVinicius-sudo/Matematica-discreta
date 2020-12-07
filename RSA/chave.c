@@ -2,28 +2,28 @@
 #include <string.h>
 #include <math.h>
 #include <stdlib.h>
-int check_prime(int a)
+int check_prime(int a)//Para Checar se é primo 
 {
-  if(a == 1 || a == 0 )
+  if(a == 1 || a == 0 )//se for 1 ou 0 não é  primo
   {
     return(0);
   }
-  else if(a == 2)
+  else if(a == 2)//se for 2 é primo 
   {
     return(1);
   }
-  else if(a % 2 == 0)
+  else if(a % 2 == 0)//se for divido por 2 não é primo
   {
     return(0);
   }
 
-  for(int i = 3;i <= a;i++)
+  for(int i = 3;i <= a;i++)//checando do 3 até o numeros "a" o numero de divisores 
   {
-    if(a % i == 0)
+    if(a % i == 0)//se ele tiver algum divisor ele não é primo pq vai ter mais de 2 divisores 
     {
       return(0);
     }
-    if(i == a)
+    if(i == a)//se ele chegar até ele mesmo ele é primo já que so vai ter o 1 e ele mesmo como divisor 
     {
       return(1);
     }
@@ -31,7 +31,7 @@ int check_prime(int a)
 
 }
 
-int mdc(int a,int b)
+int mdc(int a,int b)//checando MDC de maneira Euclidiana 
 {
   if(a % b == 0)
   {
@@ -59,7 +59,7 @@ int main()
   char n[600];
   //n = p*q;
   //int x = (p-1)*(q-1);
-  int cont = 0;
+  int cont = 0;//utilizando essa variavel para ver se ele tem alguma condição de criar o arquivo 
   if(check_prime(p)==0)
   {
     puts("p não é primo");

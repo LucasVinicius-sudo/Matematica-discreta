@@ -1,9 +1,13 @@
 import sys
+alphabet = {'A' : 2, 'B' : 3, 'C' : 4, 'D' : 5, 'E' : 6,'F' : 7, 'G' : 8, 'H' : 9, 'I' : 10, 'J' : 11, 'K' : 12, 'L' : 13, 'M' : 14, 'N' : 15, 'O' : 16, 'P' : 17, 'Q' : 18, 'R' : 19, 'S' : 20, 'T' : 21, 'U' : 22, 'V' : 23, 'W' : 24, 'X' : 25, 'Y' : 26, 'Z' : 27, ' ' : 28}
+#Alfabeto para transformar
+
+
 def creatarqkey(n,e,p,q):#criando a chave publuica
     try:
         file = open("Keypublic.txt","w")
         file.write(str(n))
-        file.write("")
+        file.write(" ")
         file.write(str(e))
         file.close()
     except FileNotFoundError:
@@ -52,6 +56,47 @@ def key():#funcao principal pedindo o p,q,e
         creatarqkey(n,e,p,q)
         print("Chave publica gerada com sucesso")
 
+#'''
+def cript(msg,k1,k2):
+    tamanho = len(msg)
+    criptmsg = ""
+    for i in range(tamanho):
+        arr = msg[i]
+        criptmsg += str(pow(alphabet[arr],k2,k1))
+        if(i + 1 < tamanho):
+            criptmsg += ' '
+    try:
+        cript_file = open("Encripttext.txt","w")
+        cript_file.write(criptmsg)
+        cript_file.close()
+        return 1
+    except FileNotFoundError:
+        print("Não foi gerado o arquivo")
+        return -1
+        #'''
+
+
+def init_cript():
+    print("Digite a mensagem de texto a Encriptar")
+    msg = input()
+    print("Digite o primeiro numero do par da chave recebido anteriormente")
+    k1 = int(input())
+    print("Digite o segundo numero do par da chave recebido anteriormente")
+    k2 = int(input())
+    if(cript(msg,k1,k2)!=-1):
+        print("Ok")
+
+
+
+def init_descript():
+    print("Digite o numero p")
+    p = int(input())
+    print("Digite o numeor q")
+    q = int(input())
+    print("Digite o Numero e")
+    e = int(input())
+    n = p*q
+
 
 
 
@@ -62,7 +107,14 @@ def main():
     if(x == 1):
         key()
     elif(x == 2):
-        print("Já vai")
+        print("Se deseja gerar uma chave digite a palavra 'key' , caso contrario ja tiver a chave digite a palavra direct")
+        word = input()
+        if(word == 'key'):
+            key()
+        elif(word == 'direct'):
+            init_cript()
+
+
     elif(x == 3):
         print("Já vai")
 main()

@@ -36,6 +36,14 @@ def mdc(a,b):#funcao para calcular MDC maneira euclidiana
     else:
         mdc(b,a%b)
 
+def find_d(z,e,d):
+    i = 1
+    for i in range(100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000):
+        if(i*e % z == 1):
+            d = i
+            return d
+            break
+
 def key():#funcao principal pedindo o p,q,e
 
     print("Digite o numero p")
@@ -45,13 +53,17 @@ def key():#funcao principal pedindo o p,q,e
     print("Digite o Numero e")
     e = int(input())
     n = p*q
+    z = (p-1)*(q-1)
+    d = find_d(z,e,0)
+    #print(d)
     if prime(p) == 0 or prime(q) == 0:
         print("Um dos numeros digitados não é primo")
     elif n < 26:
         print("O N tem que ser maior que 26")
     elif mdc((p-1)*(q-1),e) ==1:
-
         print("O e não é coprimo")
+    elif(find_d(z,e,0))!= d:
+        print("d não encontrado")
     else:
         creatarqkey(n,e,p,q)
         print("Chave publica gerada com sucesso")
@@ -66,14 +78,29 @@ def cript(msg,k1,k2):
         if(i + 1 < tamanho):
             criptmsg += ' '
     try:
+        x = criptmsg
         cript_file = open("Encripttext.txt","w")
         cript_file.write(criptmsg)
         cript_file.close()
-        return 1
+
+        return x
     except FileNotFoundError:
         print("Não foi gerado o arquivo")
         return -1
         #'''
+def descript(msg2,k1,k2):
+    print(k2)
+    print(k1)
+    descriptmsg = str(pow(msg2,k2,k1))
+    try:
+        descript_file = open("Descripttxt.txt","w")
+        descript_file.write(descriptmsg)
+        descript_file.close()
+        return 1
+    except FileNotFoundError:
+        print("Não foi gerado o arquivo")
+        return -1
+
 
 
 def init_cript():
@@ -96,6 +123,11 @@ def init_descript():
     print("Digite o Numero e")
     e = int(input())
     n = p*q
+    z = (p-1)*(q-1)
+    print("Digite a mensagem criptografada")
+    mensagem = int(input())
+    d = find_d(z,e,0)
+    descript(mensagem,n,d)
 
 
 
@@ -105,6 +137,7 @@ def main():
     print("Digite um numero sobre o que vc deseja: 1-Gerar chave 2-Encriptar mensagem 3-Desencriptar")
     x = int(input())
     if(x == 1):
+
         key()
     elif(x == 2):
         print("Se deseja gerar uma chave digite a palavra 'key' , caso contrario ja tiver a chave digite a palavra direct")
@@ -116,5 +149,5 @@ def main():
 
 
     elif(x == 3):
-        print("Já vai")
+        init_descript()
 main()
